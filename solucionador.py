@@ -33,11 +33,67 @@ class gui():
     def temenos_resultado(self, resultado):
         self.resultado.set(resultado)
 
+def comprobar_fila(tablero, nuevoValor, posicion):
+    inicio_col = posicion - (posicion % 3)
+    if int(posicion/9) == 0 or int(posicion/9) == 3 or int(posicion/9) == 6:
+        inicio_col +=9
+        if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor:
+            return False
+        for i in range(2):
+            inicio_col+=1
+            if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor:
+                return False
+        inicio_col += 7
+        for i in range(2):
+            inicio_col+=1
+            if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor:
+                return False
+        return True
+    if int(posicion/9) == 1 or int(posicion/9) == 4 or int(posicion/9) == 7:
+        inicio_col -= 9
+        if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor:
+            return False
+        for i in range(2):
+            inicio_col+=1
+            if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor:
+                return False
+        inicio_col += 9 + 7
+        if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor:
+            return False
+        for i in range(2):
+            inicio_col += 1
+            if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor:
+                return False
+        return True
+    if int(posicion/9) == 2 or int(posicion/9) == 5 or int(posicion/9) == 8:
+        inicio_col -=18
+        if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor:
+            return False
+        for i in range(2):
+            inicio_col += 1
+            if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor:
+                return False
+        inicio_col += 7
+        for i in range(2):
+            inicio_col += 1
+            if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor:
+                return False
+        return True
+
+
+
+
+def comprobar_columna(tablero, nuevoValor, posicion):
+    inicio_col = int(posicion / 9)
+
+
+
 #Recibe un array de casillas
 #Usa variable global ventana_gui para notificar los resultados
 def solucionar(casillas):
-    fijas = []
+    tablero = []
     for cuadrado in casillas:
+        tablero.append([])
         for c in cuadrado:
             casilla = c.get()
             if casilla != "":
@@ -50,19 +106,26 @@ def solucionar(casillas):
                     ventana_gui.temenos_resultado("Valores no válidos")
                     return
                 #Valor válido:
-                fijas.append(c)
+                tablero[len(tablero)-1].append(int(casilla)+10)
+            else:
+                tablero[len(tablero)-1].append(0)
+    print(tablero)
     #iniciamos proceso de solucionado
-    for cuadrado in casillas:
-        for c in cuadrado:
-            casilla = c.get()
-            if casilla == "":
-                c.set("1")
-            elif fijas.__contains__(c):
-                #Es de las fijas, la saltamos
-                break
-            elif int(casilla) < 9:
-                #Aumentar el valor de la casilla
-                c.set(str(int(casilla)+1))
+    fin = False
+    posicion = 0
+    while not fin:
+        if tablero[int(posicion/9)][posicion%9] < 9:
+            nuevoValor = tablero[int(posicion / 9)][posicion % 9] + 1
+            if tablero[int(posicion / 9)].__contains__(nuevoValor):
+                #Mantenemos posicion. El nuevo valor no es válido
+                posicion=posicion
+            if not comprobar_fila(tablero, nuevoValor, posicion):
+                posicion=posicion
+
+        elif tablero[int(posicion/9)][posicion % 9] == 9:
+            #Hay que ir para atrás
+        elif tablero[int(posicion/9)][posicion%9]:
+            #Saltar al siguiente
 
 
     ventana_gui.temenos_resultado("Solucionado")
