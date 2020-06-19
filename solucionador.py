@@ -37,46 +37,46 @@ def comprobar_fila(tablero, nuevoValor, posicion):
     inicio_col = posicion - (posicion % 3)
     if int(posicion/9) == 0 or int(posicion/9) == 3 or int(posicion/9) == 6:
         inicio_col +=9
-        if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor:
+        if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor or tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor+10:
             return False
         for i in range(2):
             inicio_col+=1
-            if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor:
+            if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor or tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor+10:
                 return False
         inicio_col += 7
         for i in range(2):
             inicio_col+=1
-            if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor:
+            if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor or tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor+10:
                 return False
         return True
     if int(posicion/9) == 1 or int(posicion/9) == 4 or int(posicion/9) == 7:
         inicio_col -= 9
-        if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor:
+        if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor or tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor+10:
             return False
         for i in range(2):
             inicio_col+=1
-            if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor:
+            if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor or tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor+10:
                 return False
         inicio_col += 9 + 7
-        if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor:
+        if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor or tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor+10:
             return False
         for i in range(2):
             inicio_col += 1
-            if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor:
+            if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor or tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor+10:
                 return False
         return True
     if int(posicion/9) == 2 or int(posicion/9) == 5 or int(posicion/9) == 8:
         inicio_col -=18
-        if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor:
+        if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor or tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor+10:
             return False
         for i in range(2):
             inicio_col += 1
-            if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor:
+            if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor or tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor+10:
                 return False
         inicio_col += 7
         for i in range(2):
             inicio_col += 1
-            if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor:
+            if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor or tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor+10:
                 return False
         return True
 
@@ -84,7 +84,37 @@ def comprobar_fila(tablero, nuevoValor, posicion):
 
 
 def comprobar_columna(tablero, nuevoValor, posicion):
-    inicio_col = int(posicion / 9)
+    inicio_col = (posicion % 3) + ((int(posicion / 9) % 3)*9) #Primer númeor de la columna
+    if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor or tablero[int(inicio_col / 9)][
+        inicio_col % 9] == nuevoValor + 10:
+        return False
+    inicio_col += 3
+    if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor or tablero[int(inicio_col / 9)][
+        inicio_col % 9] == nuevoValor + 10:
+        return False
+    inicio_col += 3
+    if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor or tablero[int(inicio_col / 9)][
+        inicio_col % 9] == nuevoValor + 10:
+        return False
+    inicio_col += -6 + 27
+    if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor or tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor+10:
+        return False
+    inicio_col += 3
+    if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor or tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor+10:
+        return False
+    inicio_col += 3
+    if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor or tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor+10:
+        return False
+    inicio_col += -6 + 27
+    if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor or tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor+10:
+        return False
+    inicio_col += 3
+    if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor or tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor+10:
+        return False
+    inicio_col += 3
+    if tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor or tablero[int(inicio_col / 9)][inicio_col % 9] == nuevoValor+10:
+        return False
+    return True
 
 
 
@@ -109,26 +139,51 @@ def solucionar(casillas):
                 tablero[len(tablero)-1].append(int(casilla)+10)
             else:
                 tablero[len(tablero)-1].append(0)
-    print(tablero)
     #iniciamos proceso de solucionado
-    fin = False
     posicion = 0
-    while not fin:
-        if tablero[int(posicion/9)][posicion%9] < 9:
+    while posicion!=81:
+        if tablero[int(posicion/9)][posicion % 9] < 9:
             nuevoValor = tablero[int(posicion / 9)][posicion % 9] + 1
-            if tablero[int(posicion / 9)].__contains__(nuevoValor):
+            valido = True
+            if tablero[int(posicion / 9)].__contains__(nuevoValor) or tablero[int(posicion / 9)].__contains__(nuevoValor + 10):
                 #Mantenemos posicion. El nuevo valor no es válido
                 posicion=posicion
+                tablero[int(posicion / 9)][posicion % 9] = nuevoValor
+                valido = False
             if not comprobar_fila(tablero, nuevoValor, posicion):
                 posicion=posicion
+                tablero[int(posicion / 9)][posicion % 9] = nuevoValor
+                valido = False
+            if not comprobar_columna(tablero, nuevoValor, posicion):
+                posicion=posicion
+                tablero[int(posicion / 9)][posicion % 9] = nuevoValor
+                valido = False
+            if valido:
+                tablero[int(posicion / 9)][posicion % 9] = nuevoValor
+                posicion += 1
 
         elif tablero[int(posicion/9)][posicion % 9] == 9:
             #Hay que ir para atrás
-        elif tablero[int(posicion/9)][posicion%9]:
+            tablero[int(posicion / 9)][posicion % 9] = 0
+            while True:
+                posicion -= 1
+                if tablero[int(posicion / 9)][posicion % 9] < 9:
+                    break
+                elif not tablero[int(posicion / 9)][posicion % 9] > 10:
+                    tablero[int(posicion / 9)][posicion % 9] = 0
+                if posicion == 0:
+                    return False
+        elif tablero[int(posicion/9)][posicion%9] > 10:
             #Saltar al siguiente
+            posicion += 1
 
-
-    ventana_gui.temenos_resultado("Solucionado")
+    posicion=0
+    for cuadrado in casillas:
+        for c in cuadrado:
+            if tablero[int(posicion / 9)][posicion % 9] > 9 :
+                tablero[int(posicion / 9)][posicion % 9] -= 10
+            c.set(str(tablero[int(posicion / 9)][posicion % 9]))
+            posicion += 1
 
 
 root = Tk()
