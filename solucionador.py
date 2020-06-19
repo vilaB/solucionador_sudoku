@@ -1,5 +1,4 @@
 from tkinter import *
-from tkinter.ttk import Separator
 
 
 class gui():
@@ -20,11 +19,13 @@ class gui():
                     casilla.grid(row=j, column=h, sticky='nesw')
                     self.casillas[i].append(valor)
         btn_calcular = Button(self.ventana, text='Calcular', bg='cyan', command=lambda: solucionar(self.casillas))
+        btn_borrar = Button(self.ventana, text='Borrar', bg='red', command=lambda: borrar(self.casillas))
         btn_calcular.grid(column=2, row=9, sticky='nesw')
+        btn_borrar.grid(column=2, row=10, sticky='nesw')
 
         self.resultado = StringVar()
         lbl = Label(self.ventana, textvariable=self.resultado)
-        lbl.grid(column=0, row=9, columnspan=2)
+        lbl.grid(column=0, row=9, columnspan=2, rowspan=2)
 
     def obtener_variables(self):
         return self.casillas
@@ -32,6 +33,12 @@ class gui():
 
     def temenos_resultado(self, resultado):
         self.resultado.set(resultado)
+
+def borrar(casillas):
+    for cuadrado in casillas:
+        for c in cuadrado:
+            c.set("")
+    ventana_gui.temenos_resultado("Borrado")
 
 def comprobar_fila(tablero, nuevoValor, posicion):
     inicio_col = posicion - (posicion % 3)
