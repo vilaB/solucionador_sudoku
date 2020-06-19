@@ -172,6 +172,7 @@ def solucionar(casillas):
                 elif not tablero[int(posicion / 9)][posicion % 9] > 10:
                     tablero[int(posicion / 9)][posicion % 9] = 0
                 if posicion == 0:
+                    ventana_gui.temenos_resultado("No tiene solucion")
                     return False
         elif tablero[int(posicion/9)][posicion%9] > 10:
             #Saltar al siguiente
@@ -184,7 +185,7 @@ def solucionar(casillas):
                 tablero[int(posicion / 9)][posicion % 9] -= 10
             c.set(str(tablero[int(posicion / 9)][posicion % 9]))
             posicion += 1
-
+    ventana_gui.temenos_resultado("Solucionado")
 
 root = Tk()
 ventana_gui = gui(root)
